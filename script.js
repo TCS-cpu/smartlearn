@@ -13,7 +13,7 @@ const subjectCatalog = {
       {name:"Biologi", icon:"🧬", sets:0},
       {name:"Fisika", icon:"⚛️", sets:0},
       {name:"Bahasa Inggris", icon:"GB", sets:0},
-      {name:"PPKN", icon:"ID", sets:0},
+      {name:"PPKN", icon:"ID", sets:1},
       {name:"IPS", icon:"🌏", sets:0},
       {name:"Prakarya", icon:"🛠️", sets:0},
       {name:"Bahasa Jepang", icon:"JP", sets:2},
@@ -38,7 +38,27 @@ const subjectCatalog = {
 // Question sets are intentionally empty until the user's real materials/questions are supplied.
 // Example structure is shown below in the commented sample.
 const questionBank = {
-  Theo: {},
+  Theo: {
+    "PPKN": {
+      1: [
+        {question:"Kata “konstitusi” berasal dari bahasa Latin yang artinya ...", options:["Menetapkan","Mengembalikan","Menghimpun","Menutup"], answer:0, explanation:"Konstitusi berasal dari kata yang bermakna menetapkan atau membentuk."},
+        {question:"Secara keseluruhan, pengertian konstitusi adalah ...", options:["Kumpulan norma sosial masyarakat yang berlaku","Peraturan yang berlaku di waktu tertentu dan tidak dibatasi","Aturan yang dibuat pejabat pemerintah daerah yang berwenang","Kumpulan dokumen (tertulis/tidak tertulis) yang membentuk sistem pemerintahan"], answer:3, explanation:"Konstitusi mencakup aturan dasar tertulis maupun tidak tertulis yang mengatur penyelenggaraan negara."},
+        {question:"Tujuan pembentukan konstitusi adalah ...", options:["Menegaskan aturan yang melindungi hak negara saja","Memberikan kebebasan tanpa batas bagi warga negara","Mengatur semua aturan penyelenggara negara secara terperinci","Membatasi tindakan sewenang-wenang pemerintah"], answer:3, explanation:"Konstitusi membatasi kekuasaan agar pemerintah tidak bertindak sewenang-wenang."},
+        {question:"Perhatikan data berikut: (1) Hukum adat, (2) UUD NRI Tahun 1945, (3) Peraturan Pemerintah, (4) Sopan santun, (5) Kebiasaan, (6) Ketetapan MPR. Contoh konstitusi tertulis ditunjukkan oleh nomor ...", options:["(1) dan (2)","(2) dan (3)","(4) dan (5)","(5) dan (6)"], answer:1, explanation:"UUD NRI Tahun 1945 dan Peraturan Pemerintah merupakan aturan tertulis. Dalam pilihan yang tersedia, pasangan tertulis yang tepat adalah (2) dan (3)."},
+        {question:"Contoh konstitusi tidak tertulis di Indonesia adalah ...", options:["Peraturan lalu lintas","Tata tertib SMPK Penabur","Upacara Kemerdekaan RI","Peraturan Daerah Provinsi"], answer:2, explanation:"Konstitusi tidak tertulis dapat berupa kebiasaan atau konvensi ketatanegaraan yang dilakukan berulang."},
+        {question:"Sifat fleksibel UUD NRI Tahun 1945 ditunjukkan oleh kemampuan UUD untuk ...", options:["Tidak bisa diubah sama sekali sejak ditetapkan","Menjadi satu-satunya sumber hukum tertinggi di Indonesia","Mengatur semua aspek kehidupan bernegara secara detail","Dapat diubah sesuai perkembangan zaman dan kebutuhan masyarakat"], answer:3, explanation:"Fleksibel berarti dapat menyesuaikan diri melalui perubahan sesuai mekanisme yang berlaku."},
+        {question:"Urutan hierarki peraturan perundang-undangan berdasarkan UU No. 12 Tahun 2011 yang benar dari daftar (1) UUD NRI Tahun 1945, (2) Perda Provinsi, (3) Peraturan Presiden, (4) Ketetapan MPR, (5) Perda Kab/Kota, (6) UU/Perppu, (7) Peraturan Pemerintah adalah ...", options:["(1)-(2)-(3)-(4)-(5)-(6)-(7)","(1)-(4)-(5)-(7)-(3)-(2)-(6)","(1)-(6)-(4)-(7)-(2)-(3)-(5)","(1)-(4)-(6)-(7)-(3)-(2)-(5)"], answer:3, explanation:"Urutan yang benar: UUD 1945, Ketetapan MPR, UU/Perppu, PP, Perpres, Perda Provinsi, lalu Perda Kabupaten/Kota."},
+        {question:"Amandemen atau perubahan UUD NRI Tahun 1945 dilakukan sebanyak ...", options:["5 kali","4 kali","3 kali","2 kali"], answer:1, explanation:"UUD NRI Tahun 1945 mengalami empat kali perubahan pada 1999–2002."},
+        {question:"Tujuan dari amandemen UUD NRI Tahun 1945 adalah ...", options:["Memperjelas kewajiban warga negara saja","Memperkuat wewenang pemerintah","Membatasi kebijakan pemerintah sehari-hari","Menyempurnakan aturan dalam UUD"], answer:3, explanation:"Amandemen dilakukan untuk menyempurnakan aturan konstitusi dan memperbaiki sistem ketatanegaraan."},
+        {question:"UUD NRI Tahun 1945 memiliki sifat singkat dan supel karena ...", options:["Setiap pasal hanya terdiri dari satu kalimat","Hanya berisi 37 pasal yang mudah dihafalkan","Isinya sangat terperinci dan sulit dipahami","Hanya memuat aturan-aturan pokok dan bersifat garis besar"], answer:3, explanation:"UUD memuat pokok-pokok aturan, sedangkan pengaturan lebih rinci dijabarkan dalam peraturan di bawahnya."},
+        {question:"Memuat norma-norma hukum yang menjadi pedoman bagi penyelenggara negara serta landasan hubungan antara negara dan lembaga negara adalah sifat UUD NRI Tahun 1945 yaitu ...", options:["Fleksibel","Supel","Tertulis","Normatif"], answer:3, explanation:"Sifat normatif berarti konstitusi memuat norma hukum yang menjadi pedoman penyelenggaraan negara dan hubungan antarlembaga negara."},
+        {question:"Seluruh peraturan perundang-undangan yang berlaku di Indonesia harus sesuai dan selaras dengan UUD NRI Tahun 1945. Ini adalah fungsi UUD sebagai ...", options:["Alat pengontrol","Alat pengatur","Alat pengikat","Alat pelengkap"], answer:0, explanation:"Sebagai alat pengontrol, UUD menjadi tolok ukur kesesuaian peraturan di bawahnya."},
+        {question:"Judicial review undang-undang terhadap UUD NRI Tahun 1945 merupakan fungsi pengontrol yang dilakukan oleh ...", options:["Mahkamah Agung","Mahkamah Konstitusi","Pengadilan Militer","Komisi Yudisial"], answer:1, explanation:"Mahkamah Konstitusi berwenang menguji undang-undang terhadap UUD 1945."},
+        {question:"Fungsi UUD NRI Tahun 1945 yang menyatukan seluruh komponen bangsa, termasuk pemerintah, lembaga negara, dan masyarakat adalah sebagai ...", options:["Alat pengontrol","Alat pengatur","Alat pengikat","Alat pelengkap"], answer:2, explanation:"Sebagai alat pengikat, UUD menjadi dasar bersama yang mempersatukan unsur-unsur kehidupan bernegara."},
+        {question:"Perhatikan pernyataan berikut: (1) Hukum tertinggi, (2) Sumber dari sumber hukum, (3) Sumber legitimasi, (4) Landasan ideal bangsa Indonesia, (5) Pedoman penyelenggaraan negara. Kedudukan UUD NRI Tahun 1945 ditunjukkan oleh ...", options:["(1), (2), dan (3)","(1), (3), dan (5)","(2), (3), dan (4)","(3), (4), dan (5)"], answer:1, explanation:"UUD 1945 berkedudukan sebagai hukum tertinggi, sumber legitimasi, dan pedoman penyelenggaraan negara. Pancasila merupakan sumber dari segala sumber hukum dan landasan ideal bangsa."}
+      ]
+    }
+  },
   Timothy: {}
 };
 /*
