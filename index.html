@@ -1,88 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartLearn | Learn and Level Up</title>
+  <meta name="theme-color" content="#315cce">
+  <title>SmartLearn | Ruang Latihan</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="navbar">
-    <a class="logo" href="#" onclick="showHome(); return false;">
-      <span class="logo-icon">S</span> SmartLearn
-    </a>
-    <div class="player-stats">
-      <span>⚡ <b id="headerXP">0</b> XP</span>
-      <span>🏆 Level <b id="headerLevel">1</b></span>
-    </div>
+  <header class="topbar">
+    <a class="brand" href="#" id="brandHome" aria-label="SmartLearn Home"><span class="brand-mark">S</span><span>SmartLearn</span></a>
+    <div class="top-actions"><span id="activeUserLabel" class="user-label hidden"></span><button id="switchUserBtn" class="button button-ghost hidden" type="button">Ganti pengguna</button></div>
   </header>
-
   <main class="container">
-    <section id="homeScreen">
-      <div class="hero">
-        <div class="hero-text">
-          <span class="eyebrow">YOUR LEARNING ADVENTURE</span>
-          <h1>Learn something.<br>Level up yourself.</h1>
-          <p>Practice your skills, challenge yourself, and earn rewards!</p>
-          <a class="primary-btn" href="#subjects">Explore subjects ↓</a>
-        </div>
-        <div class="hero-art" aria-hidden="true">🚀</div>
-      </div>
-
-      <section class="dashboard">
-        <div class="stat-card"><span class="stat-icon">⚡</span><div><p>Total XP</p><h2 id="totalXP">0</h2></div></div>
-        <div class="stat-card"><span class="stat-icon">🎯</span><div><p>Current level</p><h2 id="currentLevel">Level 1</h2></div></div>
-        <div class="stat-card"><span class="stat-icon">🏅</span><div><p>Badges earned</p><h2 id="badgeCount">0</h2></div></div>
-      </section>
-
-      <section id="subjects" class="subjects-section">
-        <div class="section-heading">
-          <div><span class="eyebrow">CHOOSE YOUR CHALLENGE</span><h2>Explore subjects</h2></div>
-          <span class="muted">4 subjects available</span>
-        </div>
-        <div class="subject-grid">
-          <button class="subject-card math" onclick="startQuiz('math')"><span class="subject-icon">📐</span><h3>Mathematics</h3><p>Numbers, algebra and logic</p><span class="play-label">Start practice →</span></button>
-          <button class="subject-card science" onclick="startQuiz('science')"><span class="subject-icon">🔬</span><h3>Science</h3><p>Discover how the world works</p><span class="play-label">Start practice →</span></button>
-          <button class="subject-card english" onclick="startQuiz('english')"><span class="subject-icon">🌎</span><h3>English</h3><p>Grammar and vocabulary</p><span class="play-label">Start practice →</span></button>
-          <button class="subject-card indonesia" onclick="startQuiz('indonesia')"><span class="subject-icon">📚</span><h3>Indonesian</h3><p>Language and literature</p><span class="play-label">Start practice →</span></button>
-        </div>
-      </section>
-
-      <section class="rewards-section">
-        <div class="section-heading"><div><span class="eyebrow">YOUR ACHIEVEMENTS</span><h2>My rewards</h2></div></div>
-        <div id="badgesList" class="badges-list"></div>
-        <button class="secondary-btn" onclick="resetProgress()">Reset my progress</button>
-      </section>
-    </section>
-
-    <section id="quizScreen" class="quiz-screen hidden">
-      <button class="back-btn" onclick="showHome()">← Back to subjects</button>
-      <div class="quiz-heading"><span id="quizSubject" class="eyebrow">MATHEMATICS</span><h2 id="questionNumber">Question 1 of 3</h2></div>
-      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
-      <article class="question-card">
-        <p class="muted">CHOOSE THE BEST ANSWER</p>
-        <h2 id="questionText">Your question goes here.</h2>
-        <div id="answerOptions" class="answer-options"></div>
-        <div id="feedback" class="feedback hidden" aria-live="polite"></div>
-        <button id="nextBtn" class="primary-btn next-btn hidden" onclick="nextQuestion()">Next question →</button>
-      </article>
-      <p class="quiz-tip">💡 Take your time. Read each question carefully!</p>
-    </section>
-
-    <section id="resultScreen" class="result-screen hidden">
-      <div class="result-card">
-        <div class="result-icon">🎉</div><span class="eyebrow">CHALLENGE COMPLETED</span>
-        <h1 id="resultTitle">Great job!</h1><p id="resultMessage">You completed your quiz.</p>
-        <div class="result-score">
-          <div><span>Correct answers</span><h2 id="finalCorrect">0/3</h2></div>
-          <div><span>XP earned</span><h2 id="earnedXP">0 XP</h2></div>
-        </div>
-        <div id="newBadges" class="new-badges"></div>
-        <button class="primary-btn" onclick="showHome()">Back to home</button>
+    <section id="profileScreen" class="screen">
+      <div class="hero"><div class="eyebrow">RUANG LATIHAN</div><h1>Belajar dan berlatih<br><span>sesuai kelasmu.</span></h1><p>Pilih profil untuk melihat mata pelajaran dan set latihan yang sesuai.</p></div>
+      <div class="profile-grid">
+        <button class="profile-card theo-card" data-profile="Theo" type="button"><span class="avatar avatar-blue">T</span><span class="profile-name">Theo</span><span class="grade-label">Kelas 8</span><span class="profile-description">Ruang latihan Theo</span><span class="profile-cta">Masuk ke ruang latihan →</span></button>
+        <button class="profile-card timothy-card" data-profile="Timothy" type="button"><span class="avatar avatar-green">T</span><span class="profile-name">Timothy</span><span class="grade-label green-grade">Kelas 5</span><span class="profile-description">Ruang latihan Timothy</span><span class="profile-cta">Masuk ke ruang latihan →</span></button>
       </div>
     </section>
+
+    <section id="homeScreen" class="screen hidden">
+      <div class="welcome-panel"><div><div class="eyebrow">RUANG LATIHAN PRIBADI</div><h1 id="welcomeTitle">Halo!</h1><p id="welcomeSubtitle">Pilih mata pelajaran yang ingin kamu latih.</p><span id="gradePill" class="grade-pill">Kelas 8</span></div><div id="homeAvatar" class="avatar avatar-blue large-avatar">T</div></div>
+      <div class="section-heading"><div><div class="eyebrow">PILIH PELAJARAN</div><h2>Mata pelajaran</h2></div><span id="subjectCountPill" class="pill">0 pelajaran</span></div>
+      <div id="subjectGrid" class="subject-grid"></div>
+    </section>
+
+    <section id="setsScreen" class="screen hidden">
+      <button id="setsBackBtn" class="back-button" type="button">← Kembali ke mata pelajaran</button>
+      <div class="sets-header"><div><div class="eyebrow" id="setsProfileEyebrow">THEO · KELAS 8</div><h1 id="setsTitle">Bahasa Indonesia</h1><p id="setsSubtitle">Pilih set latihan secara berurutan.</p></div><div id="setsSubjectIcon" class="big-subject-icon">📘</div></div>
+      <div id="setsGrid" class="sets-grid"></div>
+      <div id="emptySubjectMessage" class="empty-state hidden"><div class="empty-icon">📚</div><h2>Set soal akan ditambahkan</h2><p>Belum ada set latihan untuk mata pelajaran ini. Soal dapat ditambahkan sesuai urutan set.</p></div>
+    </section>
+
+    <section id="quizScreen" class="screen hidden">
+      <button id="quizBackBtn" class="back-button" type="button">← Kembali ke daftar set</button>
+      <div class="quiz-header"><div><div class="eyebrow" id="quizProfileLabel">THEO · KELAS 8</div><h1 id="quizTitle">Bahasa Indonesia</h1><p id="quizSetTitle">Set 1</p></div><div class="quiz-counter" id="questionCounter">Soal 1 dari 5</div></div>
+      <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+      <article class="question-card"><div class="question-meta"><span class="pill" id="questionSubjectPill">Bahasa Indonesia</span><span id="questionPointLabel">Baca soal dengan teliti.</span></div><h2 id="questionText">Pertanyaan</h2><div id="answerOptions" class="answer-options"></div><div id="feedbackBox" class="feedback hidden" role="status" aria-live="polite"></div><button id="nextQuestionBtn" class="button button-primary full-width hidden" type="button">Soal berikutnya →</button></article>
+    </section>
+
+    <section id="resultsScreen" class="screen hidden"><div class="results-card"><div class="results-emoji" id="resultEmoji">📝</div><div class="eyebrow">LATIHAN SELESAI</div><h1 id="resultTitle">Latihan selesai!</h1><p id="resultSummary">Kamu sudah menyelesaikan set ini.</p><div class="result-score"><strong id="resultScore">0/0</strong><span>Jawaban benar</span></div><button id="resultsSetsBtn" class="button button-primary full-width" type="button">Kembali ke daftar set</button><button id="resultsHomeBtn" class="button button-ghost full-width" type="button">Pilih mata pelajaran lain</button></div></section>
   </main>
-  <footer><p>SmartLearn © 2026 · Keep learning, keep growing! 🌱</p></footer>
+  <footer><span>SmartLearn</span><span>Ruang latihan untuk Theo dan Timothy</span></footer>
 </body>
 </html>

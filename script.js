@@ -1,134 +1,245 @@
-const questions = {
-  math: [
-    {question:"Solve: 2x + 6 = 16. What is x?",options:["4","5","6","8"],answer:1,explanation:"Subtract 6 from both sides: 2x = 10. Divide by 2, so x = 5."},
-    {question:"What is the square root of 144?",options:["10","11","12","14"],answer:2,explanation:"12 × 12 = 144, so the square root is 12."},
-    {question:"A triangle has angles of 50° and 60°. What is the third angle?",options:["60°","70°","80°","90°"],answer:1,explanation:"Triangle angles total 180°. Therefore, 180° − 50° − 60° = 70°."}
-  ],
-  science: [
-    {question:"Which organ pumps blood around the human body?",options:["Lungs","Brain","Heart","Kidneys"],answer:2,explanation:"The heart pumps blood through blood vessels to the body."},
-    {question:"What is the chemical formula for water?",options:["CO2","H2O","O2","NaCl"],answer:1,explanation:"Water contains two hydrogen atoms and one oxygen atom."},
-    {question:"Which process allows plants to make their own food?",options:["Respiration","Digestion","Photosynthesis","Evaporation"],answer:2,explanation:"Photosynthesis uses light energy to make food from water and carbon dioxide."}
-  ],
-  english: [
-    {question:"Choose the correct sentence.",options:["She go to school every day.","She goes to school every day.","She going to school every day.","She gone to school every day."],answer:1,explanation:"In the simple present tense, he, she, and it usually take a verb ending in -s or -es."},
-    {question:"What is the past tense of 'write'?",options:["Writed","Written","Wrote","Writing"],answer:2,explanation:"'Wrote' is the simple past tense. 'Written' is the past participle."},
-    {question:"Which word is closest in meaning to 'rapid'?",options:["Slow","Fast","Quiet","Weak"],answer:1,explanation:"'Rapid' means fast or happening quickly."}
-  ],
-  indonesia: [
-    {question:"Kalimat manakah yang menggunakan majas personifikasi?",options:["Adik berlari sangat cepat.","Angin berbisik di antara pepohonan.","Ibu membeli sayuran.","Ayah membaca koran."],answer:1,explanation:"Personifikasi memberikan sifat manusia kepada benda atau alam. Angin digambarkan dapat berbisik."},
-    {question:"Apa tujuan utama teks eksplanasi?",options:["Menghibur pembaca dengan cerita khayalan","Menjelaskan proses terjadinya suatu fenomena","Mempromosikan sebuah produk","Menggambarkan tokoh fiksi"],answer:1,explanation:"Teks eksplanasi menjelaskan bagaimana atau mengapa suatu fenomena terjadi."},
-    {question:"Manakah contoh kalimat efektif?",options:["Para siswa-siswa sedang belajar.","Agar supaya sehat, kita berolahraga.","Para siswa sedang belajar.","Banyak anak-anak sedang bermain."],answer:2,explanation:"'Para siswa sedang belajar' efektif karena tidak menggunakan penanda jamak secara berlebihan."}
-  ]
+/*
+ * SmartLearn practice room.
+ * Add subjects in subjectCatalog and add real questions in questionBank.
+ * answer is the zero-based option index: 0=A, 1=B, 2=C, 3=D.
+ * No XP, levels, badges, or saved score system is used in this version.
+ */
+const subjectCatalog = {
+  Theo: {
+    grade: 8,
+    subjects: [
+      {name:"Bahasa Indonesia", icon:"📘", sets:4},
+      {name:"Matematika", icon:"📐", sets:2},
+      {name:"Biologi", icon:"🧬", sets:0},
+      {name:"Fisika", icon:"⚛️", sets:0},
+      {name:"Bahasa Inggris", icon:"GB", sets:0},
+      {name:"PPKN", icon:"ID", sets:0},
+      {name:"IPS", icon:"🌏", sets:0},
+      {name:"Prakarya", icon:"🛠️", sets:0},
+      {name:"Bahasa Jepang", icon:"JP", sets:2},
+      {name:"Bahasa Sunda", icon:"🗣️", sets:0},
+      {name:"PJOK", icon:"🏃", sets:1}
+    ]
+  },
+  Timothy: {
+    grade: 5,
+    subjects: [
+      {name:"Bahasa Indonesia", icon:"📘", sets:0},
+      {name:"Bahasa Inggris", icon:"GB", sets:0},
+      {name:"Bahasa Sunda", icon:"🗣️", sets:0},
+      {name:"Mandarin", icon:"文", sets:0},
+      {name:"Matematika", icon:"📐", sets:0},
+      {name:"IPAS", icon:"🌱", sets:0},
+      {name:"PPKN", icon:"🇮🇩", sets:0}
+    ]
+  }
 };
 
-const subjectNames = {math:"Mathematics",science:"Science",english:"English",indonesia:"Indonesian"};
-const badgeDefinitions = [
-  {id:"first",icon:"🌟",name:"First Steps",description:"Complete your first quiz."},
-  {id:"perfect",icon:"🎯",name:"Perfect Score",description:"Answer every question correctly in one quiz."},
-  {id:"scholar",icon:"📚",name:"Rising Scholar",description:"Earn 100 total XP."},
-  {id:"master",icon:"🏆",name:"Quiz Master",description:"Reach Level 5."}
-];
-
-function loadProgress(){
-  try {
-    const saved=JSON.parse(localStorage.getItem("smartlearnProgress"));
-    if(saved&&Number.isFinite(saved.xp)&&saved.xp>=0&&Array.isArray(saved.badges)&&saved.badges.every(id=>badgeDefinitions.some(b=>b.id===id))){
-      return {xp:saved.xp,badges:[...new Set(saved.badges)],quizzes:Number.isInteger(saved.quizzes)&&saved.quizzes>=0?saved.quizzes:0};
+// Question sets are intentionally empty until the user's real materials/questions are supplied.
+// Example structure is shown below in the commented sample.
+const questionBank = {
+  Theo: {},
+  Timothy: {}
+};
+/*
+Example for adding a set:
+questionBank.Theo["Bahasa Indonesia"] = {
+  1: [
+    {
+      question: "Tuliskan pertanyaan di sini.",
+      options: ["Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D"],
+      answer: 1,
+      explanation: "Tuliskan penjelasan jawaban di sini."
     }
-  } catch(error){console.warn("Could not load saved progress.",error);}
-  return {xp:0,badges:[],quizzes:0};
+  ]
+};
+Set number 1 above corresponds to Set 1. Add 2, 3, and so on in sequence.
+*/
+
+const profileScreen = document.getElementById("profileScreen");
+const homeScreen = document.getElementById("homeScreen");
+const setsScreen = document.getElementById("setsScreen");
+const quizScreen = document.getElementById("quizScreen");
+const resultsScreen = document.getElementById("resultsScreen");
+const byId = id => document.getElementById(id);
+let activeProfile = null;
+let activeSubject = null;
+let activeSetNumber = null;
+let questionIndex = 0;
+let correctCount = 0;
+let answered = false;
+let lastSetScore = {correct:0,total:0};
+
+function showScreen(screen) {
+  [profileScreen, homeScreen, setsScreen, quizScreen, resultsScreen].forEach(item => item.classList.add("hidden"));
+  screen.classList.remove("hidden");
+  window.scrollTo({top:0, behavior:"smooth"});
 }
-let progress=loadProgress(),currentSubject="",currentQuestions=[],currentIndex=0,correctCount=0,answered=false,earnedThisQuiz=0,newlyEarned=[];
-function getLevel(xp){return Math.floor(xp/50)+1;}
-function saveProgress(){try{localStorage.setItem("smartlearnProgress",JSON.stringify(progress));}catch(error){console.warn("Progress could not be saved.",error);}}
-function updateDashboard(){
-  const level=getLevel(progress.xp);
-  document.getElementById("headerXP").textContent=progress.xp;
-  document.getElementById("headerLevel").textContent=level;
-  document.getElementById("totalXP").textContent=progress.xp;
-  document.getElementById("currentLevel").textContent="Level "+level;
-  document.getElementById("badgeCount").textContent=progress.badges.length;
-  renderBadges();
+function subjectRecord(name) {
+  return subjectCatalog[activeProfile].subjects.find(subject => subject.name === name);
 }
-function renderBadges(){
-  const container=document.getElementById("badgesList");container.replaceChildren();
-  badgeDefinitions.forEach(badge=>{
-    const unlocked=progress.badges.includes(badge.id),card=document.createElement("div");
-    card.className="badge-item"+(unlocked?"":" locked");
-    const icon=document.createElement("div");icon.className="badge-icon";icon.textContent=badge.icon;
-    const name=document.createElement("p");name.textContent=badge.name;
-    const description=document.createElement("small");description.textContent=unlocked?"Unlocked!":badge.description;
-    card.append(icon,name,description);container.appendChild(card);
+function getSetQuestions(profile, subject, setNumber) {
+  return questionBank[profile]?.[subject]?.[setNumber] || [];
+}
+function chooseProfile(name) {
+  activeProfile = name;
+  byId("activeUserLabel").textContent = `${name} · Kelas ${subjectCatalog[name].grade}`;
+  byId("activeUserLabel").classList.remove("hidden");
+  byId("switchUserBtn").classList.remove("hidden");
+  renderHome();
+  showScreen(homeScreen);
+}
+function renderHome() {
+  const person = subjectCatalog[activeProfile];
+  byId("welcomeTitle").textContent = `Halo, ${activeProfile}!`;
+  byId("welcomeSubtitle").textContent = `Pilih mata pelajaran kelas ${person.grade} yang ingin kamu latih.`;
+  byId("gradePill").textContent = `Kelas ${person.grade}`;
+  byId("homeAvatar").textContent = activeProfile[0];
+  byId("homeAvatar").className = `avatar large-avatar ${activeProfile === "Theo" ? "avatar-blue" : "avatar-green"}`;
+  byId("subjectCountPill").textContent = `${person.subjects.length} pelajaran`;
+  const grid = byId("subjectGrid");
+  grid.innerHTML = "";
+  person.subjects.forEach(subject => {
+    const subjectKeys = Object.keys(questionBank[activeProfile]?.[subject.name] || {});
+    const totalSets = Math.max(subject.sets, ...subjectKeys.map(Number), 0);
+    const hasAnyQuestions = subjectKeys.some(key => getSetQuestions(activeProfile, subject.name, Number(key)).length > 0);
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "subject-card";
+    card.innerHTML = `<span class="subject-icon"></span><span class="subject-name"></span><span class="subject-desc"></span><span class="subject-action"></span>`;
+    const icon = card.querySelector(".subject-icon");
+    // Use textContent for labels to avoid treating course names as HTML.
+    icon.textContent = subject.icon;
+    card.querySelector(".subject-name").textContent = subject.name;
+    card.querySelector(".subject-desc").textContent = "Latihan " + subject.name;
+    const action = card.querySelector(".subject-action");
+    if (totalSets > 0) {
+      action.textContent = `${totalSets} set soal →`;
+      if (!hasAnyQuestions) action.classList.add("empty");
+      card.addEventListener("click", () => openSets(subject.name));
+    } else {
+      action.textContent = "Set soal akan ditambahkan";
+      action.classList.add("empty");
+      card.addEventListener("click", () => openSets(subject.name));
+    }
+    grid.appendChild(card);
   });
 }
-function awardBadge(id){
-  if(progress.badges.includes(id))return;
-  progress.badges.push(id);
-  const badge=badgeDefinitions.find(item=>item.id===id);
-  if(badge)newlyEarned.push(badge);
+function openSets(subjectName) {
+  activeSubject = subjectName;
+  const record = subjectRecord(subjectName);
+  const actualSetNumbers = Object.keys(questionBank[activeProfile]?.[subjectName] || {}).map(Number).filter(n => Number.isInteger(n) && n > 0);
+  const lastDefined = actualSetNumbers.length ? Math.max(...actualSetNumbers) : 0;
+  const totalSets = Math.max(record?.sets || 0, lastDefined);
+  byId("setsProfileEyebrow").textContent = `${activeProfile.toUpperCase()} · KELAS ${subjectCatalog[activeProfile].grade}`;
+  byId("setsTitle").textContent = subjectName;
+  byId("setsSubtitle").textContent = totalSets ? "Set ditampilkan sesuai urutan. Set baru dapat ditambahkan setelah materi soal tersedia." : "Belum ada set latihan untuk mata pelajaran ini.";
+  byId("setsSubjectIcon").textContent = record?.icon || "📚";
+  byId("setsGrid").innerHTML = "";
+  byId("emptySubjectMessage").classList.toggle("hidden", totalSets > 0);
+  for (let number = 1; number <= totalSets; number++) {
+    const questions = getSetQuestions(activeProfile, subjectName, number);
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = `set-card ${questions.length ? "available" : "unavailable"}`;
+    card.innerHTML = `<span class="set-number">${number}</span><span class="set-copy"><span class="set-title"></span><span class="set-status"></span></span><span class="set-arrow">${questions.length ? "→" : "· · ·"}</span>`;
+    card.querySelector(".set-title").textContent = `Set ${number}`;
+    card.querySelector(".set-status").textContent = questions.length ? `${questions.length} soal · Mulai latihan` : "Soal belum ditambahkan";
+    card.disabled = questions.length === 0;
+    if (questions.length) card.addEventListener("click", () => startSet(number));
+    byId("setsGrid").appendChild(card);
+  }
+  showScreen(setsScreen);
 }
-function showHome(){
-  document.getElementById("homeScreen").classList.remove("hidden");
-  document.getElementById("quizScreen").classList.add("hidden");
-  document.getElementById("resultScreen").classList.add("hidden");
-  updateDashboard();window.scrollTo({top:0,behavior:"smooth"});
+function startSet(setNumber) {
+  activeSetNumber = setNumber;
+  questionIndex = 0;
+  correctCount = 0;
+  answered = false;
+  byId("quizProfileLabel").textContent = `${activeProfile.toUpperCase()} · KELAS ${subjectCatalog[activeProfile].grade}`;
+  byId("quizTitle").textContent = activeSubject;
+  byId("quizSetTitle").textContent = `Set ${setNumber}`;
+  showScreen(quizScreen);
+  renderQuestion();
 }
-function startQuiz(subject){
-  if(!questions[subject])return;
-  currentSubject=subject;currentQuestions=questions[subject];currentIndex=0;correctCount=0;answered=false;earnedThisQuiz=0;newlyEarned=[];
-  document.getElementById("homeScreen").classList.add("hidden");
-  document.getElementById("resultScreen").classList.add("hidden");
-  document.getElementById("quizScreen").classList.remove("hidden");
-  document.getElementById("quizSubject").textContent=subjectNames[subject].toUpperCase();
-  renderQuestion();window.scrollTo({top:0,behavior:"smooth"});
-}
-function renderQuestion(){
-  const question=currentQuestions[currentIndex];answered=false;
-  document.getElementById("questionNumber").textContent=`Question ${currentIndex+1} of ${currentQuestions.length}`;
-  document.getElementById("questionText").textContent=question.question;
-  document.getElementById("progressBar").style.width=`${(currentIndex/currentQuestions.length)*100}%`;
-  const feedback=document.getElementById("feedback");feedback.className="feedback hidden";feedback.textContent="";
-  const next=document.getElementById("nextBtn");next.classList.add("hidden");next.textContent=currentIndex===currentQuestions.length-1?"See results →":"Next question →";
-  const optionsContainer=document.getElementById("answerOptions");optionsContainer.replaceChildren();
-  question.options.forEach((option,index)=>{
-    const button=document.createElement("button");button.className="answer-btn";button.textContent=String.fromCharCode(65+index)+". "+option;
-    button.addEventListener("click",()=>checkAnswer(index));optionsContainer.appendChild(button);
+function renderQuestion() {
+  const questions = getSetQuestions(activeProfile, activeSubject, activeSetNumber);
+  const q = questions[questionIndex];
+  answered = false;
+  byId("questionCounter").textContent = `Soal ${questionIndex + 1} dari ${questions.length}`;
+  byId("progressBar").style.width = `${((questionIndex) / questions.length) * 100}%`;
+  byId("questionSubjectPill").textContent = activeSubject;
+  byId("questionPointLabel").textContent = "Baca soal dengan teliti.";
+  byId("questionText").textContent = q.question;
+  byId("answerOptions").innerHTML = "";
+  byId("feedbackBox").className = "feedback hidden";
+  byId("feedbackBox").textContent = "";
+  byId("nextQuestionBtn").classList.add("hidden");
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer-option";
+    const letter = document.createElement("span");
+    letter.className = "option-letter";
+    letter.textContent = String.fromCharCode(65 + index);
+    const label = document.createElement("span");
+    label.textContent = option;
+    button.append(letter, label);
+    button.addEventListener("click", () => selectAnswer(index));
+    byId("answerOptions").appendChild(button);
   });
 }
-function checkAnswer(selectedIndex){
-  if(answered)return;answered=true;
-  const question=currentQuestions[currentIndex],buttons=document.querySelectorAll(".answer-btn"),isCorrect=selectedIndex===question.answer,feedback=document.getElementById("feedback");
-  buttons.forEach((button,index)=>{button.disabled=true;if(index===question.answer)button.classList.add("correct");else if(index===selectedIndex)button.classList.add("wrong");});
-  if(isCorrect){correctCount++;earnedThisQuiz+=10;feedback.textContent="✓ Correct! "+question.explanation;feedback.className="feedback correct";}
-  else{feedback.textContent="✗ Not quite. "+question.explanation;feedback.className="feedback wrong";}
-  document.getElementById("progressBar").style.width=`${((currentIndex+1)/currentQuestions.length)*100}%`;
-  document.getElementById("nextBtn").classList.remove("hidden");
+function selectAnswer(selected) {
+  if (answered) return;
+  answered = true;
+  const q = getSetQuestions(activeProfile, activeSubject, activeSetNumber)[questionIndex];
+  const buttons = [...byId("answerOptions").querySelectorAll("button")];
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add("correct");
+    else if (index === selected) button.classList.add("incorrect");
+  });
+  const correct = selected === q.answer;
+  if (correct) correctCount++;
+  const feedback = byId("feedbackBox");
+  feedback.className = `feedback ${correct ? "good" : "bad"}`;
+  const title = document.createElement("strong");
+  title.textContent = correct ? "Benar!" : "Belum tepat.";
+  const explanation = document.createElement("span");
+  explanation.textContent = q.explanation || (correct ? "Jawabanmu benar." : "Perhatikan pilihan yang ditandai hijau sebagai jawaban benar.");
+  feedback.replaceChildren(title, explanation);
+  byId("nextQuestionBtn").textContent = questionIndex === getSetQuestions(activeProfile, activeSubject, activeSetNumber).length - 1 ? "Lihat hasil latihan →" : "Soal berikutnya →";
+  byId("nextQuestionBtn").classList.remove("hidden");
 }
-function nextQuestion(){
-  if(!answered)return;
-  if(currentIndex<currentQuestions.length-1){currentIndex++;renderQuestion();}else{finishQuiz();}
+function nextQuestion() {
+  questionIndex++;
+  const questions = getSetQuestions(activeProfile, activeSubject, activeSetNumber);
+  if (questionIndex < questions.length) renderQuestion();
+  else finishSet();
 }
-function finishQuiz(){
-  earnedThisQuiz+=5;progress.xp+=earnedThisQuiz;progress.quizzes++;awardBadge("first");
-  if(correctCount===currentQuestions.length)awardBadge("perfect");
-  if(progress.xp>=100)awardBadge("scholar");
-  if(getLevel(progress.xp)>=5)awardBadge("master");
-  saveProgress();updateDashboard();
-  document.getElementById("quizScreen").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");
-  const percentage=Math.round(correctCount/currentQuestions.length*100);let title="Keep practicing!",message="Every question is a chance to learn something new.";
-  if(percentage===100){title="Perfect score!";message="Amazing! You answered every question correctly.";}
-  else if(percentage>=70){title="Great work!";message="You are making excellent progress. Keep it up!";}
-  else if(percentage>=40){title="Good effort!";message="Review the explanations and try another challenge.";}
-  document.getElementById("resultTitle").textContent=title;document.getElementById("resultMessage").textContent=message;
-  document.getElementById("finalCorrect").textContent=`${correctCount}/${currentQuestions.length}`;
-  document.getElementById("earnedXP").textContent=`+${earnedThisQuiz} XP`;
-  const badgeContainer=document.getElementById("newBadges");badgeContainer.replaceChildren();
-  if(newlyEarned.length===0){const msg=document.createElement("p");msg.className="muted";msg.textContent="Keep going to unlock new badges!";badgeContainer.appendChild(msg);}
-  else newlyEarned.forEach(badge=>{const item=document.createElement("div");item.className="badge-item";const icon=document.createElement("div");icon.className="badge-icon";icon.textContent=badge.icon;const name=document.createElement("p");name.textContent=badge.name;item.append(icon,name);badgeContainer.appendChild(item);});
-  window.scrollTo({top:0,behavior:"smooth"});
+function finishSet() {
+  const total = getSetQuestions(activeProfile, activeSubject, activeSetNumber).length;
+  lastSetScore = {correct:correctCount, total};
+  byId("progressBar").style.width = "100%";
+  byId("resultEmoji").textContent = correctCount === total ? "🎉" : "📝";
+  byId("resultTitle").textContent = correctCount === total ? "Semua benar!" : "Latihan selesai!";
+  byId("resultSummary").textContent = `${activeProfile}, kamu telah menyelesaikan ${activeSubject} — Set ${activeSetNumber}.`;
+  byId("resultScore").textContent = `${correctCount}/${total}`;
+  showScreen(resultsScreen);
 }
-function resetProgress(){
-  if(!window.confirm("Reset all XP, levels, and badges? This cannot be undone."))return;
-  progress={xp:0,badges:[],quizzes:0};saveProgress();updateDashboard();
-}
-updateDashboard();
+function returnToSets() { openSets(activeSubject); }
+
+document.querySelectorAll("[data-profile]").forEach(button => button.addEventListener("click", () => chooseProfile(button.dataset.profile)));
+byId("switchUserBtn").addEventListener("click", () => {
+  activeProfile = null;
+  byId("activeUserLabel").classList.add("hidden");
+  byId("switchUserBtn").classList.add("hidden");
+  showScreen(profileScreen);
+});
+byId("brandHome").addEventListener("click", event => { event.preventDefault(); if (activeProfile) { renderHome(); showScreen(homeScreen); } else showScreen(profileScreen); });
+byId("setsBackBtn").addEventListener("click", () => { renderHome(); showScreen(homeScreen); });
+byId("quizBackBtn").addEventListener("click", returnToSets);
+byId("nextQuestionBtn").addEventListener("click", nextQuestion);
+byId("resultsSetsBtn").addEventListener("click", returnToSets);
+byId("resultsHomeBtn").addEventListener("click", () => { renderHome(); showScreen(homeScreen); });
+showScreen(profileScreen);
