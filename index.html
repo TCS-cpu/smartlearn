@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartLearn | Learn and Level Up</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="logo" href="#" onclick="showHome(); return false;">
+      <span class="logo-icon">S</span> SmartLearn
+    </a>
+    <div class="player-stats">
+      <span>⚡ <b id="headerXP">0</b> XP</span>
+      <span>🏆 Level <b id="headerLevel">1</b></span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="homeScreen">
+      <div class="hero">
+        <div class="hero-text">
+          <span class="eyebrow">YOUR LEARNING ADVENTURE</span>
+          <h1>Learn something.<br>Level up yourself.</h1>
+          <p>Practice your skills, challenge yourself, and earn rewards!</p>
+          <a class="primary-btn" href="#subjects">Explore subjects ↓</a>
+        </div>
+        <div class="hero-art" aria-hidden="true">🚀</div>
+      </div>
+
+      <section class="dashboard">
+        <div class="stat-card"><span class="stat-icon">⚡</span><div><p>Total XP</p><h2 id="totalXP">0</h2></div></div>
+        <div class="stat-card"><span class="stat-icon">🎯</span><div><p>Current level</p><h2 id="currentLevel">Level 1</h2></div></div>
+        <div class="stat-card"><span class="stat-icon">🏅</span><div><p>Badges earned</p><h2 id="badgeCount">0</h2></div></div>
+      </section>
+
+      <section id="subjects" class="subjects-section">
+        <div class="section-heading">
+          <div><span class="eyebrow">CHOOSE YOUR CHALLENGE</span><h2>Explore subjects</h2></div>
+          <span class="muted">4 subjects available</span>
+        </div>
+        <div class="subject-grid">
+          <button class="subject-card math" onclick="startQuiz('math')"><span class="subject-icon">📐</span><h3>Mathematics</h3><p>Numbers, algebra and logic</p><span class="play-label">Start practice →</span></button>
+          <button class="subject-card science" onclick="startQuiz('science')"><span class="subject-icon">🔬</span><h3>Science</h3><p>Discover how the world works</p><span class="play-label">Start practice →</span></button>
+          <button class="subject-card english" onclick="startQuiz('english')"><span class="subject-icon">🌎</span><h3>English</h3><p>Grammar and vocabulary</p><span class="play-label">Start practice →</span></button>
+          <button class="subject-card indonesia" onclick="startQuiz('indonesia')"><span class="subject-icon">📚</span><h3>Indonesian</h3><p>Language and literature</p><span class="play-label">Start practice →</span></button>
+        </div>
+      </section>
+
+      <section class="rewards-section">
+        <div class="section-heading"><div><span class="eyebrow">YOUR ACHIEVEMENTS</span><h2>My rewards</h2></div></div>
+        <div id="badgesList" class="badges-list"></div>
+        <button class="secondary-btn" onclick="resetProgress()">Reset my progress</button>
+      </section>
+    </section>
+
+    <section id="quizScreen" class="quiz-screen hidden">
+      <button class="back-btn" onclick="showHome()">← Back to subjects</button>
+      <div class="quiz-heading"><span id="quizSubject" class="eyebrow">MATHEMATICS</span><h2 id="questionNumber">Question 1 of 3</h2></div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      <article class="question-card">
+        <p class="muted">CHOOSE THE BEST ANSWER</p>
+        <h2 id="questionText">Your question goes here.</h2>
+        <div id="answerOptions" class="answer-options"></div>
+        <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+        <button id="nextBtn" class="primary-btn next-btn hidden" onclick="nextQuestion()">Next question →</button>
+      </article>
+      <p class="quiz-tip">💡 Take your time. Read each question carefully!</p>
+    </section>
+
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-card">
+        <div class="result-icon">🎉</div><span class="eyebrow">CHALLENGE COMPLETED</span>
+        <h1 id="resultTitle">Great job!</h1><p id="resultMessage">You completed your quiz.</p>
+        <div class="result-score">
+          <div><span>Correct answers</span><h2 id="finalCorrect">0/3</h2></div>
+          <div><span>XP earned</span><h2 id="earnedXP">0 XP</h2></div>
+        </div>
+        <div id="newBadges" class="new-badges"></div>
+        <button class="primary-btn" onclick="showHome()">Back to home</button>
+      </div>
+    </section>
+  </main>
+  <footer><p>SmartLearn © 2026 · Keep learning, keep growing! 🌱</p></footer>
+</body>
+</html>
